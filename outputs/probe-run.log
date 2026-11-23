@@ -1,0 +1,62 @@
+probe_all.sh run start: 2026-11-23T00:45:48Z
+pack root: /home/hatch/workspace/goals/postfiat-task-node-connection/hidden_files/task-9c76b6384b737e129acb9953824e8a64/pack
+safety boundary: read-only queries only; no transactions, no votes, no flood traffic
+server_info.json attempt 1 -> 200 1.323638s sha256=835ae02ba295835b061831e307f171e13548772dfafa30f7ec708affcabf2959
+validated seq: 8284498 hash: 1F1A016884FA0A7458BF11BE71F7ADEABD740961643DD8466996E213A5D91499 earliest: 8200054
+ledger_current.json attempt 1 -> 200 0.864936s sha256=8f5513ab63a8b2eb6d43d83609648ab05e35e80c2cd4732118d104e2ad7d750b
+ledger_closed.json attempt 1 -> 200 0.788811s sha256=589f6e89df7965db76626f0fbe0b8096e3b685088ff18b854e6ad685d8659e12
+fee.json attempt 1 -> 200 0.824138s sha256=130e42e0b5faef7412962de7097d84d85ab0ef9a0a6499e9c545c5b9cfc37c21
+server_state.json attempt 1 -> 200 0.811786s sha256=517a5ab54d58fad4b60da60288beb26aa1219cf1d1b9a6ae1f511fb6ab8f1a8c
+feature_list.json attempt 1 -> 200 0.843057s sha256=70585f308ab55dfdc84093e95a21c3859099dcbf1c5b04f1f00cea3a6785984f
+ledger_earliest.json attempt 1 -> 200 0.836019s sha256=49370761cfb26d611380bbdb75e6d930e70effa35bad7ef3229b08d7a2e496ea
+ledger_8200053.json attempt 1 -> 200 0.862192s sha256=7aad6741bb739abee0e05df3a5c97cd98cc1922930990cc1ba234ba588bbb0e4
+ledger_86785.json attempt 1 -> 200 0.953021s sha256=da830f28f44b10a803c01973beadc1dd11795202c29cc80779989be5726bc842
+ledger_86784.json attempt 1 -> 200 0.874945s sha256=52661f47e523806ab906d1a42f7d74d0a6e7e2275c91d3e0db236c650a876a4d
+ledger_validated.json attempt 1 -> 200 0.798939s sha256=8f5513ab63a8b2eb6d43d83609648ab05e35e80c2cd4732118d104e2ad7d750b
+recent tx hash for lookup: <none in this ledger>
+flag ledgers: 8284160 8283904 8283648
+ledger_flag.json attempt 1 -> 200 0.873991s sha256=e738bf8a9912620f8b6244f0182d9bab989da45fe2909c06ad7dbda7c45e354c
+ledger_header_flag.json attempt 1 -> 200 1.007424s sha256=72d726244e04297358c8aaa9dc19d2798a8b52f8680f8f6241b4cc2095bd8f33
+ledger_header_flag2.json attempt 1 -> 200 0.903991s sha256=0a5fbce6035244498157fcc04839a061a455c3d68f4644dee22bb3e4b0e8e2e8
+ledger_header_flag3.json attempt 1 -> 200 0.813042s sha256=c1a17d6eabbc94ff120bf6ed93506d0c47bd104a94d2faf5bcc1b0fccaf905a8
+ledger_header_earliest.json attempt 1 -> 200 0.908090s sha256=e0a16ca13eca601d384d32f2af35108243e459926715b78d18629fccd99ea4ee
+ledger_header_86785.json attempt 1 -> 200 0.844875s sha256=116fa49a55bb590d5ad5f096f680de7e931b6049575553ac6c673b7f4583df32
+ledger_header_validated.json attempt 1 -> 200 0.820244s sha256=356b17dc7c8214d23e0df63e39898d681aab4f482e57e75a0fecd116c7fb77cc
+ledger_chain_0.json attempt 1 -> 200 0.796269s sha256=91d4e1b58b71f7208a1f24a644cf0f255751cdb75649dd1d8e4826a2152d200d
+ledger_chain_1.json attempt 1 -> 200 0.850870s sha256=62481abcd4f22a54f39601a7044a5fb690f40daf6fc1bc2fa94b5c3e249e9b3d
+ledger_chain_2.json attempt 1 -> 200 0.796274s sha256=208a9945745a01b2a41f66176542611f9c5599dc86cc69d16a8415221057d8a0
+ledger_chain_3.json attempt 1 -> 200 0.912485s sha256=55ac5b9dae47f298384d84e9139e5d7c57a2507a00ef30309eae54b95b4a0694
+ledger_chain_4.json attempt 1 -> 200 0.789041s sha256=023f162774a1d217b3ab353abbd5aeeec59b00546ba99d942d9b0771d4b88de8
+ledger_chain_5.json attempt 1 -> 200 1.012529s sha256=8af46536286ac2debefe7f9e94add26aafe932353b9d8ca13edf26d923a0721d
+ledger_chain_earliest_0.json attempt 1 -> 200 0.859985s sha256=49370761cfb26d611380bbdb75e6d930e70effa35bad7ef3229b08d7a2e496ea
+ledger_chain_earliest_1.json attempt 1 -> 200 0.879220s sha256=98b985e7f331ca5a159974fbc3c8e604bf9c12ce080f59e2d796708137230e36
+ledger_chain_earliest_2.json attempt 1 -> 200 0.929710s sha256=98646db04358e6be0c4ffa201cfcbc9c5142696a4f7620552843d2d3a764440e
+ledger_data_validated.json attempt 1 -> 200 0.821732s sha256=d3e33c7434f4b20e742e1f075e2d9251c9f79d51847e5272d41345b79fe07d6a
+ledger_data_earliest.json attempt 1 -> 200 0.845143s sha256=0c04b10759c04240bac528e632655d09a900a32ac89a27004fc8c0408b588666
+skip keylet: B4979A36CDC7F3D3D5C31A4EAE2AC7D7209DDA877588B9AFC66799692AB0D66B skip(8284160) keylet: A89F167EF93B8E615074E3043133600DDAB076E24C87D0336BA5F9FAB0F9C627
+ledger_entry_skip.json attempt 1 -> 200 1.015119s sha256=aca42666c80b4ff5613c6fa8d2f75e3e70dcac170f312a0c6b914e17eea4017e
+ledger_entry_skip_flag.json attempt 1 -> 200 1.016433s sha256=b8f69e6aec79987dd1ea03387c7fb2b2776a50ff4c8a89ba4f955db2c236cc04
+ledger_entry_genesis.json attempt 1 -> 200 0.867738s sha256=dcebdc40fde29dcc6f0eafc9585bce13a7be22950cef17b2d3475a7cd4dd71f3
+tx_86785.json attempt 1 -> 200 0.896824s sha256=1f0bcedcf3c2944dd4872714906dca777b59fd08d28bcb1cb92d8ec89249816e
+account_tx_genesis.json attempt 1 -> 200 0.934497s sha256=a8700d69a70929f8e42ea8509f62f4883a01799caa4510b41099d4a68c49a55b
+account_info_genesis.json attempt 1 -> 200 0.943544s sha256=90e23f3be9e52767e5db44c8db3e0747b72d8d50788628421a0cb53b5c7daafe
+account_info_genesis_earliest.json attempt 1 -> 200 0.879809s sha256=0510b3662c19ab7614d3e23da8903f80e1f68842bbe844719c879ae93db3aec4
+ledger_request_validated.json attempt 1 -> 403 0.811601s sha256=91268711f43361e9d094089486492db986d6413020b6763903eb4c3b473216b4
+validators.json attempt 1 -> 403 0.846018s sha256=91268711f43361e9d094089486492db986d6413020b6763903eb4c3b473216b4
+peers.json attempt 1 -> 403 0.819540s sha256=91268711f43361e9d094089486492db986d6413020b6763903eb4c3b473216b4
+invalid_method.json attempt 1 -> 200 0.839448s sha256=e7b21b8092a7192fb17ab985ff2ebd3de10df4b395311385249fdea2acd17540
+vhs-health.json -> 200 0.668140s 13B sha256=f5d6edfe0efd7b74018c16ae42db2944c767cf3b7e0faf6a9b91539812d914d9
+vhs-amendments.json -> 200 0.638119s 2690B sha256=0f61e791be3d0147af69cbe50f573c2794b01d8b842f7f2985785f462d94a188
+vhs-amendments-info.json -> 200 0.706459s 14554B sha256=e35f3f8fe7c213e9b4b35548511fe9215af5b70714bae1f3bd275b27bb350340
+vhs-amendments-vote-test.json -> 200 0.691334s 17549B sha256=0855e3cae36568e526e95f7feace8342548a12382c7fb17f0cc56ab713b77b8b
+vhs-validators.json -> 200 0.627671s 51433B sha256=9a1744d5a937016692020a96da144e333a7fdcb77e4eb40847e202fc85d3a4e6
+vhs-topology.json -> 200 0.810864s 32054B sha256=73e4f9c4a28a853b13bc087b0fdb58fdaa49990b18340c881924b29fce4acfc2
+testnet_vl.json -> 200 0.696981s 14781B sha256=5d4f5a18a18fead4105e5dc00cf7e11a71b9be4bc140357d1b4ea12116df59e7
+explorer_health.json -> 500 0.826770s 33B sha256=de52b25e91c4558119b2a577b3d20a808e2bbca0f33b2caf63f5e81325a6a3ab
+postfiat_org.html -> 200 0.706142s 34725B sha256=dce07dda2432b362f8507f59fd95bdfcdcbcb1beaa2c1fe9016f7263fa971f8b
+postfiat_whitepaper.html -> 200 0.754391s 163089B sha256=33b15b1a28f5ebdad68ccb3eeb719fc0e4738b8fe3e8ce89a5317143e7ba472c
+cadence probe start: seq 8284512 at 2026-11-23T00:46:31.851197+00:00
+cadence probe end: seq 8284532 at 2026-11-23T00:47:32.681260+00:00
+ledger cadence: 3.042 s/ledger (20 ledgers in 60.8 s)
+wrote derived/cadence.json
+probe_all.sh run end: 2026-11-23T00:47:34Z
