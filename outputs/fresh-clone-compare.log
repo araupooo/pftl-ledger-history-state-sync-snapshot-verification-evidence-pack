@@ -1,0 +1,5 @@
+clean_reproduce.sh fresh run: 2026-11-23T01:22:44Z
+workdir: /tmp/pftl-histsync-repro.pO1bR1
+shipped validated ledger: 8284498
+fresh validated ledger: 8285196
+compare: 13/13 checks PASS

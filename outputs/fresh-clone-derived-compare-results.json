@@ -1,0 +1,71 @@
+{
+ "checks": [
+  {
+   "check": "findings total unchanged",
+   "pass": true,
+   "detail": "12 vs shipped 12"
+  },
+  {
+   "check": "claims total unchanged",
+   "pass": true,
+   "detail": "30 vs shipped 30"
+  },
+  {
+   "check": "risks total unchanged",
+   "pass": true,
+   "detail": "14 vs shipped 14"
+  },
+  {
+   "check": "gaps total unchanged",
+   "pass": true,
+   "detail": "7 vs shipped 7"
+  },
+  {
+   "check": "history earliest unchanged",
+   "pass": true,
+   "detail": "8200054 vs shipped 8200054"
+  },
+  {
+   "check": "validated ledger advanced",
+   "pass": true,
+   "detail": "8285196 vs shipped 8284498"
+  },
+  {
+   "check": "build version unchanged",
+   "pass": true,
+   "detail": "1.0.9"
+  },
+  {
+   "check": "hash recomputation still all MATCH",
+   "pass": true,
+   "detail": "17/17"
+  },
+  {
+   "check": "chain links still all OK",
+   "pass": true,
+   "detail": "7/7"
+  },
+  {
+   "check": "drill still 21/21 PASS",
+   "pass": true,
+   "detail": "drill result: 21/21 cases PASS (A 8, B 6, C 7)"
+  },
+  {
+   "check": "every drill case has a per-case elapsed time",
+   "pass": true,
+   "detail": "21 cases"
+  },
+  {
+   "check": "86785 activation tx still txnNotFound",
+   "pass": true,
+   "detail": "{'error': 'txnNotFound', 'error_code': 29}"
+  },
+  {
+   "check": "account_tx still clamps to earliest",
+   "pass": true,
+   "detail": "echoed min 8200054"
+  }
+ ],
+ "passed": 13,
+ "total": 13
+}
