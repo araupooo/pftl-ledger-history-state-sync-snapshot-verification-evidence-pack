@@ -1,0 +1,351 @@
+{
+ "pinned_commit": "0085a1ff885d6a446369cf73a4430f75af22be55",
+ "files": {
+  "src/xrpld/app/ledger/Ledger.cpp": {
+   "sha256": "8c56833ab46470050f355c06efec642ed4054209ffcb63084aca9da734f82516",
+   "git_blob_sha": "26552704258627756361a07e0c85a260ed229321",
+   "lines": 1166
+  },
+  "include/xrpl/protocol/LedgerHeader.h": {
+   "sha256": "54404569099958333ba9f0c2b692fe783e7b3d13f2cad7fbec7dea90daaa0ff9",
+   "git_blob_sha": "0b35979971a1c5493875eaa478b6e2db1a0071bf",
+   "lines": 103
+  },
+  "include/xrpl/protocol/HashPrefix.h": {
+   "sha256": "d4871691961216f1801ebf4fce0047b68fdd08796e58151aeffb3d1cdfdae4b3",
+   "git_blob_sha": "7e486af4c01c1106e035e5f57ce01fbf07644758",
+   "lines": 106
+  },
+  "src/libxrpl/ledger/View.cpp": {
+   "sha256": "a2457d6e70129bf87e9b4fc27b96ba121302d3954609a9de7c496b22fe415b70",
+   "git_blob_sha": "2a1cb0cab5cb95a643ff1d0322192868b0aeb55f",
+   "lines": 3961
+  },
+  "include/xrpl/ledger/View.h": {
+   "sha256": "30f4a21e22e99d8e068f7a66052ba36dfe229c1522501c9adf85ebc77c34ca83",
+   "git_blob_sha": "8e0a9dd5ff8cc3bb18b44a68ec8141f1983b3dbd",
+   "lines": 1203
+  },
+  "src/xrpld/app/ledger/Ledger.h": {
+   "sha256": "a774ae8608fab05260de0154918f34e65da6cef094f656c58f2fa1202bd89786",
+   "git_blob_sha": "552f59ff19c171d8e216b2761cc0a4e8f928f1dd",
+   "lines": 483
+  },
+  "src/xrpld/app/ledger/detail/LedgerMaster.cpp": {
+   "sha256": "eff20a953d6b6fafe7ca44a2999a4c90c5ef62eea82e43baed8ba3e959da5ef1",
+   "git_blob_sha": "67826c253286c69622334382ac89db711c7a60d2",
+   "lines": 2285
+  },
+  "src/xrpld/app/ledger/detail/InboundLedger.cpp": {
+   "sha256": "bed5f8eece16ae34ded38d3c1dd09019b76ef9703be7b14441efb27d71c08f07",
+   "git_blob_sha": "47d546c3af380a5baea9dd2536daf9e34a324f3f",
+   "lines": 1356
+  },
+  "src/xrpld/app/misc/SHAMapStoreImp.cpp": {
+   "sha256": "8bfa87fc6c2ac346c76737176d2461e3e9ad9e6d5779232d8606750b99157ca5",
+   "git_blob_sha": "080e0d016fd8122155c3bbb14bfdb379765a182d",
+   "lines": 731
+  },
+  "src/xrpld/app/ledger/detail/LedgerCleaner.cpp": {
+   "sha256": "56ec405d50fd08f76fee8a7ab3b3a19ff08366cbac3575119f406c3408557dd9",
+   "git_blob_sha": "7c0dccfb9b44314a4cfa4841e9762ce99ac98ab6",
+   "lines": 465
+  },
+  "src/xrpld/rpc/detail/RPCHelpers.cpp": {
+   "sha256": "511f074f1344dbef120da7b51eb9bdd74723f94e317ea9a333a37ef3e3a293bc",
+   "git_blob_sha": "edb91611bec2b7b581511cc3e85b6087dd40941d",
+   "lines": 1148
+  },
+  "src/xrpld/app/ledger/detail/LedgerReplayMsgHandler.cpp": {
+   "sha256": "6c8f72cfcb08d12bfadc60a8d86f23b1ea5b2d6fd8fc758a35235ae6d96dec5a",
+   "git_blob_sha": "e78c49c26df44889f5b8d252b002f0f13f8477c0",
+   "lines": 346
+  },
+  "src/xrpld/app/misc/ValidatorList.h": {
+   "sha256": "574b96520e38999a3a3ecd9d326a39ad02f0a1511a72f95a7f86fc34e46f1496",
+   "git_blob_sha": "b610dd81dc479895973ed48756e1803f93b3c95c",
+   "lines": 988
+  },
+  "src/xrpld/rpc/handlers/LedgerRequest.cpp": {
+   "sha256": "de78e190ab35eccd54efd227e5177910bd20f31805a8b91a018bfbcc265866ec",
+   "git_blob_sha": "fed89daaf20232ef3c356104bef500564f9b9368",
+   "lines": 51
+  },
+  "src/libxrpl/protocol/ErrorCodes.cpp": {
+   "sha256": "8f44f493be5bc9c02c8e73fc712c70653a08a13f369723a4d07e7d109400f8b7",
+   "git_blob_sha": "ec295343cef1b5c8665aef3b0838db709f3c8fa2",
+   "lines": 231
+  },
+  "src/xrpld/core/detail/Config.cpp": {
+   "sha256": "95c64fef64dd41bd505f7e1536cf03c4dfe733238a201d021109e079ca7cd639",
+   "git_blob_sha": "19b33b251ab2aeacee5aede6d8746aba6dea4ee6",
+   "lines": 1251
+  }
+ },
+ "excerpts": {
+  "ledger-hash-calc.txt": {
+   "sha256": "c1dfbc0f5e659d585d8afda870faa28f01c38cdf474bb557a12bd0e162b6dd6b",
+   "blocks": [
+    {
+     "file": "src/xrpld/app/ledger/Ledger.cpp",
+     "lines": "53-68"
+    }
+   ]
+  },
+  "ledger-header-fields.txt": {
+   "sha256": "b0dd1252816f55562686f7446aa33659d2317c5b4595ecda1403eb4ff43af49a",
+   "blocks": [
+    {
+     "file": "include/xrpl/protocol/LedgerHeader.h",
+     "lines": "40-73"
+    }
+   ]
+  },
+  "ledger-hash-prefix.txt": {
+   "sha256": "885de90b04977db32e0494d660fb3a29cd472da29598b2498f2c95e6c4e8ad70",
+   "blocks": [
+    {
+     "file": "include/xrpl/protocol/HashPrefix.h",
+     "lines": "31-37"
+    },
+    {
+     "file": "include/xrpl/protocol/HashPrefix.h",
+     "lines": "66-70"
+    }
+   ]
+  },
+  "ledger-set-immutable.txt": {
+   "sha256": "eedf2bb6f6e68189908fbba5798961246be09330d227aeafaa5f2081cba42bd4",
+   "blocks": [
+    {
+     "file": "src/xrpld/app/ledger/Ledger.cpp",
+     "lines": "357-374"
+    }
+   ]
+  },
+  "ledger-skip-list.txt": {
+   "sha256": "1890c401b628e3ccdad5b48e673ed486a30d0c14e8bbaff9e847ab74beb0a46e",
+   "blocks": [
+    {
+     "file": "src/xrpld/app/ledger/Ledger.cpp",
+     "lines": "900-968"
+    }
+   ]
+  },
+  "hash-of-seq.txt": {
+   "sha256": "76d5eafc4ce033dcd47b627779c942c84791ca557a401488584065defd05affc",
+   "blocks": [
+    {
+     "file": "src/libxrpl/ledger/View.cpp",
+     "lines": "1040-1102"
+    }
+   ]
+  },
+  "candidate-ledger.txt": {
+   "sha256": "aa5a6d53a92019a974b33d06f2c698fd4fbab1e5244dfccbd23eb8882d9afe90",
+   "blocks": [
+    {
+     "file": "include/xrpl/ledger/View.h",
+     "lines": "505-524"
+    }
+   ]
+  },
+  "flag-ledger-interval.txt": {
+   "sha256": "7d033cb87a955d464a29756eaca3b14f96dc8f46db4b60499cfe07bb23b011ea",
+   "blocks": [
+    {
+     "file": "src/xrpld/app/ledger/Ledger.h",
+     "lines": "426-430"
+    }
+   ]
+  },
+  "ledger-complete-range.txt": {
+   "sha256": "143bd9a31ed29d7109133bc2fa7d4d1a321d2a57c69a82aa53b8a47a62ec3dac",
+   "blocks": [
+    {
+     "file": "src/xrpld/app/ledger/detail/LedgerMaster.cpp",
+     "lines": "1612-1620"
+    },
+    {
+     "file": "src/xrpld/app/ledger/detail/LedgerMaster.cpp",
+     "lines": "826-886"
+    }
+   ]
+  },
+  "fetch-for-history.txt": {
+   "sha256": "d1501cb5c7ceb5faf41cb91f7da7e2014a6319b8c5b4bd9606625b0b403cb921",
+   "blocks": [
+    {
+     "file": "src/xrpld/app/ledger/detail/LedgerMaster.cpp",
+     "lines": "1825-1936"
+    }
+   ]
+  },
+  "fetch-pack-request.txt": {
+   "sha256": "00c500c97614022ab17631ce157714d22416c764fbb27d3784336d91a8145297",
+   "blocks": [
+    {
+     "file": "src/xrpld/app/ledger/detail/LedgerMaster.cpp",
+     "lines": "723-768"
+    }
+   ]
+  },
+  "get-ledger-hash-for-history.txt": {
+   "sha256": "3b35b5726fe37787f8d7f95d8d504253b437c06b7783e47c05f897ac0c09375c",
+   "blocks": [
+    {
+     "file": "src/xrpld/app/ledger/detail/LedgerMaster.cpp",
+     "lines": "1208-1227"
+    }
+   ]
+  },
+  "do-advance-history-fill.txt": {
+   "sha256": "be7dd2a25cbab336c61bd5503cee195b02c9799d2a616df7098a8008657baf23",
+   "blocks": [
+    {
+     "file": "src/xrpld/app/ledger/detail/LedgerMaster.cpp",
+     "lines": "1940-2028"
+    }
+   ]
+  },
+  "should-acquire.txt": {
+   "sha256": "417448cebfb69592ef5cf4083be77221affa846dbc8037066cc8de2f47fbad59",
+   "blocks": [
+    {
+     "file": "src/xrpld/app/ledger/detail/LedgerMaster.cpp",
+     "lines": "75-99"
+    }
+   ]
+  },
+  "inbound-ledger-timeouts.txt": {
+   "sha256": "d72db1c192e4982ee44a314f580a0a9e29a4ce328a2dec3b73b0b36dd73a9eb4",
+   "blocks": [
+    {
+     "file": "src/xrpld/app/ledger/detail/InboundLedger.cpp",
+     "lines": "48-74"
+    },
+    {
+     "file": "src/xrpld/app/ledger/detail/InboundLedger.cpp",
+     "lines": "376-391"
+    }
+   ]
+  },
+  "inbound-ledger-fetch-root.txt": {
+   "sha256": "5b4e0992cd825acf8a963d05fb1d22a3cd736c46420c4231d74ba7d8ca01eaa3",
+   "blocks": [
+    {
+     "file": "src/xrpld/app/ledger/detail/InboundLedger.cpp",
+     "lines": "300-361"
+    }
+   ]
+  },
+  "inbound-ledger-needed-hashes.txt": {
+   "sha256": "e4dc130ab9f01c618861b1191385b20f28bb759a2e06770408b3d3404d56fb98",
+   "blocks": [
+    {
+     "file": "src/xrpld/app/ledger/detail/InboundLedger.cpp",
+     "lines": "1007-1041"
+    }
+   ]
+  },
+  "shamapstore-online-delete.txt": {
+   "sha256": "cef0a542afa510c40cfa8c44759cd34e1c81372a958c19fdaca578f3946660a6",
+   "blocks": [
+    {
+     "file": "src/xrpld/app/misc/SHAMapStoreImp.cpp",
+     "lines": "121-163"
+    },
+    {
+     "file": "src/xrpld/app/misc/SHAMapStoreImp.cpp",
+     "lines": "323-333"
+    }
+   ]
+  },
+  "ledger-cleaner.txt": {
+   "sha256": "8c6808878b97518c96282970855853dd5a971b661d5d9c399bbb4d4bf2e5454b",
+   "blocks": [
+    {
+     "file": "src/xrpld/app/ledger/detail/LedgerCleaner.cpp",
+     "lines": "382-456"
+    }
+   ]
+  },
+  "get-ledger-by-context.txt": {
+   "sha256": "763da0a663d6daca32ca5a3ebb2be66af0a263fb819c514f74d7de6312942366",
+   "blocks": [
+    {
+     "file": "src/xrpld/rpc/detail/RPCHelpers.cpp",
+     "lines": "1030-1145"
+    }
+   ]
+  },
+  "ledger-replay-hash-check.txt": {
+   "sha256": "50f912f0faff974a3907d87f50596fd0948056f1d5304b6faff7a3f8172fd443",
+   "blocks": [
+    {
+     "file": "src/xrpld/app/ledger/detail/LedgerReplayMsgHandler.cpp",
+     "lines": "134-154"
+    }
+   ]
+  },
+  "validator-list-verify.txt": {
+   "sha256": "4fe6e82b69ca8f7b30b7e7ff1fbb7278e2a4f99f145aed0bff554ec41927b8bb",
+   "blocks": [
+    {
+     "file": "src/xrpld/app/misc/ValidatorList.h",
+     "lines": "880-895"
+    }
+   ]
+  },
+  "ledger-request-rpc.txt": {
+   "sha256": "1b1af74886a57eb4b4bd7f86eac597d541b5579a31b7841c6d907d504a4e135e",
+   "blocks": [
+    {
+     "file": "src/xrpld/rpc/handlers/LedgerRequest.cpp",
+     "lines": "36-49"
+    }
+   ]
+  },
+  "txn-not-found.txt": {
+   "sha256": "ccd1a14795245ad66261f088ab1a22b412a60193adca5b3f4b35d708d383ebab",
+   "blocks": [
+    {
+     "file": "src/libxrpl/protocol/ErrorCodes.cpp",
+     "lines": "113-117"
+    }
+   ]
+  },
+  "config-ledger-history.txt": {
+   "sha256": "241bd59c64ef2a104bc25ac70e6933c04321a3932d0e91c7fea028b6586ebca8",
+   "blocks": [
+    {
+     "file": "src/xrpld/core/detail/Config.cpp",
+     "lines": "652-661"
+    }
+   ]
+  },
+  "ledger-master-get-by-seq.txt": {
+   "sha256": "53c8220ad910334cae1a2f32c89d5a18531b2597fb5554cbc79bfc5fbd1d0f26",
+   "blocks": [
+    {
+     "file": "src/xrpld/app/ledger/detail/LedgerMaster.cpp",
+     "lines": "1730-1763"
+    }
+   ]
+  }
+ },
+ "absence_checks": {
+  "snapshot RPC handler": {
+   "pattern": "snapshot (case-insensitive)",
+   "matches": 1,
+   "files": [
+    "src/xrpld/rpc/handlers/Subscribe.cpp"
+   ]
+  },
+  "snapshot in ledger acquisition": {
+   "pattern": "snapshot (case-insensitive)",
+   "matches": 0,
+   "files": []
+  }
+ }
+}
