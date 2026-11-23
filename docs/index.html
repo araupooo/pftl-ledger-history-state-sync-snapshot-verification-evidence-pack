@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>PFTL Ledger History, State-Sync, and Snapshot Verification</title>
+<style>
+body { font-family: Georgia, serif; max-width: 760px; margin: 2em auto; padding: 0 1em; line-height: 1.6; color: #1a1a1a; }
+h1 { font-size: 1.6em; } h2 { font-size: 1.25em; margin-top: 1.5em; }
+table { border-collapse: collapse; margin: 1em 0; } th, td { border: 1px solid #999; padding: 0.3em 0.6em; text-align: left; }
+code { background: #f0f0f0; padding: 0 0.2em; }
+</style>
+</head>
+<body>
+<h1>PFTL Ledger History, State-Sync, and Snapshot Verification</h1>
+<p><strong>Verdict: The PFTL testnet's ledger history is verifiable inside a
+~2.96-day window and not re-derivable outside it; state sync is verifiable
+from hashes and the validator list, but there is no snapshot mechanism to
+verify — a fresh node must re-fetch state from peers.</strong></p>
+<p>Pinned source: postfiatd <code>0085a1ff885d6a446369cf73a4430f75af22be55</code>
+(2026-10-10, PR #50 merge, v1.0.9). Live probe: 2026-11-23 00:45:48 UTC
+against <code>https://rpc.testnet.postfiat.org/</code> (network ID 2025).</p>
+<h2>What the node holds</h2>
+<table>
+<tr><th>Measure</th><th>Value</th></tr>
+<tr><td>Complete ledgers</td><td>8200054–8284498 (84,445 ledgers)</td></tr>
+<tr><td>Validated ledger</td><td>8284498</td></tr>
+<tr><td>Window span</td><td>255,540 s (2.96 days)</td></tr>
+<tr><td>Ledger cadence</td><td>3.042 s/ledger</td></tr>
+<tr><td>Peers / quorum</td><td>21 / 17 of 25</td></tr>
+<tr><td>Server state</td><td>full, validated age 1 s</td></tr>
+</table>
+<h2>Verification results</h2>
+<ul>
+<li>17/17 sampled header hashes recompute (sha512Half, prefix 0x4C575200).</li>
+<li>7/7 parent links hold; 5/5 rolling skip-list hashes and 3/3 anchor skip positions match.</li>
+<li>21/21 drill cases pass (fresh-node join 8, history-gap encounter 6, corrupted-snapshot detection 7), each with a measured per-case time.</li>
+<li>The 86785 bulk activation (64 amendments, 2026-02-09) is not re-derivable from the node: ledger <code>lgrNotFound</code>, activation transaction <code>txnNotFound</code>. The event is known only from the Validator History Service.</li>
+<li>No native ledger-snapshot export/import exists in the pinned code; state sync is SHAMap fetch from peers only.</li>
+</ul>
+<h2>Counts</h2>
+<ul>
+<li>Findings: 12 (HIGH 3, MEDIUM 5, LOW 4), all VERIFIED.</li>
+<li>Claims: 30 (VERIFIED 23, SPECIFIED 6, UNVERIFIED 0, UNTESTABLE 1).</li>
+<li>Risks: 14 (HIGH 3, MEDIUM 6, LOW 5).</li>
+<li>Gaps: 7.</li>
+</ul>
+<h2>Reproduce</h2>
+<pre>bash scripts/probe_all.sh      # read-only live probe
+python3 scripts/analyze.py     # derived JSONs
+python3 scripts/drill.py       # 21 timed cases
+bash scripts/clean_reproduce.sh  # full fresh-environment check
+bash scripts/verify_digests.sh   # sha256sum -c SHA256SUMS</pre>
+<p>Full detail: <code>docs/decision-memo.md</code>,
+<code>docs/ledger-history-inventory.md</code>,
+<code>docs/state-sync-spec.md</code>,
+<code>docs/snapshot-verification.md</code>, runbooks A–C,
+<code>docs/claim-index.md</code>, <code>docs/risk-register.md</code>,
+<code>docs/gap-register.md</code>.</p>
+</body>
+</html>
