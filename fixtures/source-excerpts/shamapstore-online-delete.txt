@@ -1,0 +1,60 @@
+# Source excerpts — postfiatd 0085a1ff885d6a446369cf73a4430f75af22be55 (2026-10-10, PR #50 merge, v1.0.9).
+# Line numbers verified with grep -n on a local checkout of the pinned commit.
+
+# --- src/xrpld/app/misc/SHAMapStoreImp.cpp lines 121-163 ---
+    get_if_exists(section, "online_delete", deleteInterval_);
+
+    if (deleteInterval_)
+    {
+        // Configuration that affects the behavior of online delete
+        get_if_exists(section, "delete_batch", deleteBatch_);
+        std::uint32_t temp;
+        if (get_if_exists(section, "back_off_milliseconds", temp) ||
+            // Included for backward compaibility with an undocumented setting
+            get_if_exists(section, "backOff", temp))
+        {
+            backOff_ = std::chrono::milliseconds{temp};
+        }
+        if (get_if_exists(section, "age_threshold_seconds", temp))
+            ageThreshold_ = std::chrono::seconds{temp};
+        if (get_if_exists(section, "recovery_wait_seconds", temp))
+            recoveryWaitTime_ = std::chrono::seconds{temp};
+
+        get_if_exists(section, "advisory_delete", advisoryDelete_);
+
+        auto const minInterval = config.standalone()
+            ? minimumDeletionIntervalSA_
+            : minimumDeletionInterval_;
+        if (deleteInterval_ < minInterval)
+        {
+            Throw<std::runtime_error>(
+                "online_delete must be at least " +
+                std::to_string(minInterval));
+        }
+
+        if (config.LEDGER_HISTORY > deleteInterval_)
+        {
+            Throw<std::runtime_error>(
+                "online_delete must not be less than ledger_history "
+                "(currently " +
+                std::to_string(config.LEDGER_HISTORY) + ")");
+        }
+
+        state_db_.init(config, dbName_);
+        dbPaths();
+    }
+}
+
+
+# --- src/xrpld/app/misc/SHAMapStoreImp.cpp lines 323-333 ---
+        LedgerIndex const validatedSeq = validatedLedger->info().seq;
+        if (!lastRotated)
+        {
+            lastRotated = validatedSeq;
+            state_db_.setLastRotated(lastRotated);
+        }
+
+        bool const readyToRotate =
+            validatedSeq >= lastRotated + deleteInterval_ &&
+            canDelete_ >= lastRotated - 1 && healthWait() == keepGoing;
+

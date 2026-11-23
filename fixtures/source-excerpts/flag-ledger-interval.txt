@@ -1,0 +1,9 @@
+# Source excerpts — postfiatd 0085a1ff885d6a446369cf73a4430f75af22be55 (2026-10-10, PR #50 merge, v1.0.9).
+# Line numbers verified with grep -n on a local checkout of the pinned commit.
+
+# --- src/xrpld/app/ledger/Ledger.h lines 426-430 ---
+std::uint32_t constexpr FLAG_LEDGER_INTERVAL = 256;
+/** Returns true if the given ledgerIndex is a flag ledgerIndex */
+bool
+isFlagLedger(LedgerIndex seq);
+

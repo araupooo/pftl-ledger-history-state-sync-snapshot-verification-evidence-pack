@@ -1,0 +1,22 @@
+# Source excerpts — postfiatd 0085a1ff885d6a446369cf73a4430f75af22be55 (2026-10-10, PR #50 merge, v1.0.9).
+# Line numbers verified with grep -n on a local checkout of the pinned commit.
+
+# --- src/xrpld/app/ledger/Ledger.cpp lines 357-374 ---
+Ledger::setImmutable(bool rehash)
+{
+    // Force update, since this is the only
+    // place the hash transitions to valid
+    if (!mImmutable && rehash)
+    {
+        info_.txHash = txMap_.getHash().as_uint256();
+        info_.accountHash = stateMap_.getHash().as_uint256();
+    }
+
+    if (rehash)
+        info_.hash = calculateLedgerHash(info_);
+
+    mImmutable = true;
+    txMap_.setImmutable();
+    stateMap_.setImmutable();
+    setup();
+}

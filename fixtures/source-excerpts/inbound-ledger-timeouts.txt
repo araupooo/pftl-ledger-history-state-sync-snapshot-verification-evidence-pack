@@ -1,0 +1,49 @@
+# Source excerpts — postfiatd 0085a1ff885d6a446369cf73a4430f75af22be55 (2026-10-10, PR #50 merge, v1.0.9).
+# Line numbers verified with grep -n on a local checkout of the pinned commit.
+
+# --- src/xrpld/app/ledger/detail/InboundLedger.cpp lines 48-74 ---
+    // Number of peers to add on a timeout
+    ,
+    peerCountAdd = 3
+
+    // how many timeouts before we give up
+    ,
+    ledgerTimeoutRetriesMax = 6
+
+    // how many timeouts before we get aggressive
+    ,
+    ledgerBecomeAggressiveThreshold = 4
+
+    // Number of nodes to find initially
+    ,
+    missingNodesFind = 256
+
+    // Number of nodes to request for a reply
+    ,
+    reqNodesReply = 128
+
+    // Number of nodes to request blindly
+    ,
+    reqNodes = 12
+};
+
+// millisecond for each ledger timeout
+auto constexpr ledgerAcquireTimeout = 3000ms;
+
+# --- src/xrpld/app/ledger/detail/InboundLedger.cpp lines 376-391 ---
+    if (timeouts_ > ledgerTimeoutRetriesMax)
+    {
+        if (mSeq != 0)
+        {
+            JLOG(journal_.warn())
+                << timeouts_ << " timeouts for ledger " << mSeq;
+        }
+        else
+        {
+            JLOG(journal_.warn())
+                << timeouts_ << " timeouts for ledger " << hash_;
+        }
+        failed_ = true;
+        done();
+        return;
+    }

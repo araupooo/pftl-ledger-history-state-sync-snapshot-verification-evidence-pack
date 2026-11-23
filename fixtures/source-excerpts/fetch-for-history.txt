@@ -1,0 +1,116 @@
+# Source excerpts — postfiatd 0085a1ff885d6a446369cf73a4430f75af22be55 (2026-10-10, PR #50 merge, v1.0.9).
+# Line numbers verified with grep -n on a local checkout of the pinned commit.
+
+# --- src/xrpld/app/ledger/detail/LedgerMaster.cpp lines 1825-1936 ---
+LedgerMaster::fetchForHistory(
+    std::uint32_t missing,
+    bool& progress,
+    InboundLedger::Reason reason,
+    std::unique_lock<std::recursive_mutex>& sl)
+{
+    scope_unlock sul{sl};
+    if (auto hash = getLedgerHashForHistory(missing, reason))
+    {
+        XRPL_ASSERT(
+            hash->isNonZero(),
+            "ripple::LedgerMaster::fetchForHistory : found ledger");
+        auto ledger = getLedgerByHash(*hash);
+        if (!ledger)
+        {
+            if (!app_.getInboundLedgers().isFailure(*hash))
+            {
+                ledger =
+                    app_.getInboundLedgers().acquire(*hash, missing, reason);
+                if (!ledger && missing != fetch_seq_ &&
+                    missing > app_.getNodeStore().earliestLedgerSeq())
+                {
+                    JLOG(m_journal.trace())
+                        << "fetchForHistory want fetch pack " << missing;
+                    fetch_seq_ = missing;
+                    getFetchPack(missing, reason);
+                }
+                else
+                    JLOG(m_journal.trace())
+                        << "fetchForHistory no fetch pack for " << missing;
+            }
+            else
+                JLOG(m_journal.debug())
+                    << "fetchForHistory found failed acquire";
+        }
+        if (ledger)
+        {
+            auto seq = ledger->info().seq;
+            XRPL_ASSERT(
+                seq == missing,
+                "ripple::LedgerMaster::fetchForHistory : sequence match");
+            JLOG(m_journal.trace()) << "fetchForHistory acquired " << seq;
+            setFullLedger(ledger, false, false);
+            int fillInProgress;
+            {
+                std::lock_guard lock(m_mutex);
+                mHistLedger = ledger;
+                fillInProgress = mFillInProgress;
+            }
+            if (fillInProgress == 0 &&
+                app_.getRelationalDatabase().getHashByIndex(seq - 1) ==
+                    ledger->info().parentHash)
+            {
+                {
+                    // Previous ledger is in DB
+                    std::lock_guard lock(m_mutex);
+                    mFillInProgress = seq;
+                }
+                app_.getJobQueue().addJob(
+                    jtADVANCE, "tryFill", [this, ledger]() {
+                        tryFill(ledger);
+                    });
+            }
+            progress = true;
+        }
+        else
+        {
+            std::uint32_t fetchSz;
+            // Do not fetch ledger sequences lower
+            // than the earliest ledger sequence
+            fetchSz = app_.getNodeStore().earliestLedgerSeq();
+            fetchSz = missing >= fetchSz
+                ? std::min(ledger_fetch_size_, (missing - fetchSz) + 1)
+                : 0;
+            try
+            {
+                for (std::uint32_t i = 0; i < fetchSz; ++i)
+                {
+                    std::uint32_t seq = missing - i;
+                    if (auto h = getLedgerHashForHistory(seq, reason))
+                    {
+                        XRPL_ASSERT(
+                            h->isNonZero(),
+                            "ripple::LedgerMaster::fetchForHistory : "
+                            "prefetched ledger");
+                        app_.getInboundLedgers().acquire(*h, seq, reason);
+                    }
+                }
+            }
+            catch (std::exception const& ex)
+            {
+                JLOG(m_journal.warn())
+                    << "Threw while prefetching: " << ex.what();
+            }
+        }
+    }
+    else
+    {
+        JLOG(m_journal.fatal())
+            << "Can't find ledger following prevMissing " << missing;
+        JLOG(m_journal.fatal())
+            << "Pub:" << mPubLedgerSeq << " Val:" << mValidLedgerSeq;
+        JLOG(m_journal.fatal())
+            << "Ledgers: " << app_.getLedgerMaster().getCompleteLedgers();
+        JLOG(m_journal.fatal())
+            << "Acquire reason: "
+            << (reason == InboundLedger::Reason::HISTORY ? "HISTORY"
+                                                         : "NOT HISTORY");
+        clearLedger(missing + 1);
+        progress = true;
+    }
+}

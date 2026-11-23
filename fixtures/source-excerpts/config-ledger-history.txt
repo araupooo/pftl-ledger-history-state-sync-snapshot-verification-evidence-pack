@@ -1,0 +1,14 @@
+# Source excerpts — postfiatd 0085a1ff885d6a446369cf73a4430f75af22be55 (2026-10-10, PR #50 merge, v1.0.9).
+# Line numbers verified with grep -n on a local checkout of the pinned commit.
+
+# --- src/xrpld/core/detail/Config.cpp lines 652-661 ---
+    if (getSingleSection(secConfig, SECTION_LEDGER_HISTORY, strTemp, j_))
+    {
+        if (boost::iequals(strTemp, "full"))
+            LEDGER_HISTORY =
+                std::numeric_limits<decltype(LEDGER_HISTORY)>::max();
+        else if (boost::iequals(strTemp, "none"))
+            LEDGER_HISTORY = 0;
+        else
+            LEDGER_HISTORY = beast::lexicalCastThrow<std::uint32_t>(strTemp);
+    }

@@ -1,0 +1,79 @@
+# Source excerpts — postfiatd 0085a1ff885d6a446369cf73a4430f75af22be55 (2026-10-10, PR #50 merge, v1.0.9).
+# Line numbers verified with grep -n on a local checkout of the pinned commit.
+
+# --- src/xrpld/app/ledger/detail/LedgerCleaner.cpp lines 382-456 ---
+    doLedgerCleaner()
+    {
+        auto shouldExit = [this] {
+            std::lock_guard lock(mutex_);
+            return shouldExit_;
+        };
+
+        std::shared_ptr<ReadView const> goodLedger;
+
+        while (!shouldExit())
+        {
+            LedgerIndex ledgerIndex;
+            LedgerHash ledgerHash;
+            bool doNodes;
+            bool doTxns;
+
+            if (app_.getFeeTrack().isLoadedLocal())
+            {
+                JLOG(j_.debug()) << "Waiting for load to subside";
+                std::this_thread::sleep_for(std::chrono::seconds(5));
+                continue;
+            }
+
+            {
+                std::lock_guard lock(mutex_);
+                if ((minRange_ > maxRange_) || (maxRange_ == 0) ||
+                    (minRange_ == 0))
+                {
+                    minRange_ = maxRange_ = 0;
+                    return;
+                }
+                ledgerIndex = maxRange_;
+                doNodes = checkNodes_;
+                doTxns = fixTxns_;
+            }
+
+            ledgerHash = getHash(ledgerIndex, goodLedger);
+
+            bool fail = false;
+            if (ledgerHash.isZero())
+            {
+                JLOG(j_.info())
+                    << "Unable to get hash for ledger " << ledgerIndex;
+                fail = true;
+            }
+            else if (!doLedger(ledgerIndex, ledgerHash, doNodes, doTxns))
+            {
+                JLOG(j_.info()) << "Failed to process ledger " << ledgerIndex;
+                fail = true;
+            }
+
+            if (fail)
+            {
+                {
+                    std::lock_guard lock(mutex_);
+                    ++failures_;
+                }
+                // Wait for acquiring to catch up to us
+                std::this_thread::sleep_for(std::chrono::seconds(2));
+            }
+            else
+            {
+                {
+                    std::lock_guard lock(mutex_);
+                    if (ledgerIndex == minRange_)
+                        ++minRange_;
+                    if (ledgerIndex == maxRange_)
+                        --maxRange_;
+                    failures_ = 0;
+                }
+                // Reduce I/O pressure and wait for acquiring to catch up to us
+                std::this_thread::sleep_for(std::chrono::milliseconds(100));
+            }
+        }
+    }

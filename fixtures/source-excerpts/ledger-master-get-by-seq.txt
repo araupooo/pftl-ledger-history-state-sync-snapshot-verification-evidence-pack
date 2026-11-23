@@ -1,0 +1,38 @@
+# Source excerpts — postfiatd 0085a1ff885d6a446369cf73a4430f75af22be55 (2026-10-10, PR #50 merge, v1.0.9).
+# Line numbers verified with grep -n on a local checkout of the pinned commit.
+
+# --- src/xrpld/app/ledger/detail/LedgerMaster.cpp lines 1730-1763 ---
+LedgerMaster::getLedgerBySeq(std::uint32_t index)
+{
+    if (index <= mValidLedgerSeq)
+    {
+        // Always prefer a validated ledger
+        if (auto valid = mValidLedger.get())
+        {
+            if (valid->info().seq == index)
+                return valid;
+
+            try
+            {
+                auto const hash = hashOfSeq(*valid, index, m_journal);
+
+                if (hash)
+                    return mLedgerHistory.getLedgerByHash(*hash);
+            }
+            catch (std::exception const&)
+            {
+                // Missing nodes are already handled
+            }
+        }
+    }
+
+    if (auto ret = mLedgerHistory.getLedgerBySeq(index))
+        return ret;
+
+    auto ret = mClosedLedger.get();
+    if (ret && (ret->info().seq == index))
+        return ret;
+
+    clearLedger(index);
+    return {};
+}

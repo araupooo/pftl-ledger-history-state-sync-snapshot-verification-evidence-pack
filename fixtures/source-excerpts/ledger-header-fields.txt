@@ -1,0 +1,38 @@
+# Source excerpts — postfiatd 0085a1ff885d6a446369cf73a4430f75af22be55 (2026-10-10, PR #50 merge, v1.0.9).
+# Line numbers verified with grep -n on a local checkout of the pinned commit.
+
+# --- include/xrpl/protocol/LedgerHeader.h lines 40-73 ---
+
+    LedgerIndex seq = 0;
+    NetClock::time_point parentCloseTime = {};
+
+    //
+    // For closed ledgers
+    //
+
+    // Closed means "tx set already determined"
+    uint256 hash = beast::zero;
+    uint256 txHash = beast::zero;
+    uint256 accountHash = beast::zero;
+    uint256 parentHash = beast::zero;
+
+    XRPAmount drops = beast::zero;
+
+    // If validated is false, it means "not yet validated."
+    // Once validated is true, it will never be set false at a later time.
+    // VFALCO TODO Make this not mutable
+    bool mutable validated = false;
+    bool accepted = false;
+
+    // flags indicating how this ledger close took place
+    int closeFlags = 0;
+
+    // the resolution for this ledger close time (2-120 seconds)
+    NetClock::duration closeTimeResolution = {};
+
+    // For closed ledgers, the time the ledger
+    // closed. For open ledgers, the time the ledger
+    // will close if there's no transactions.
+    //
+    NetClock::time_point closeTime = {};
+};

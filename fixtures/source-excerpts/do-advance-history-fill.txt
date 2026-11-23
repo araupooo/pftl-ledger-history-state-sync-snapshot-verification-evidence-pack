@@ -1,0 +1,93 @@
+# Source excerpts — postfiatd 0085a1ff885d6a446369cf73a4430f75af22be55 (2026-10-10, PR #50 merge, v1.0.9).
+# Line numbers verified with grep -n on a local checkout of the pinned commit.
+
+# --- src/xrpld/app/ledger/detail/LedgerMaster.cpp lines 1940-2028 ---
+LedgerMaster::doAdvance(std::unique_lock<std::recursive_mutex>& sl)
+{
+    do
+    {
+        mAdvanceWork = false;  // If there's work to do, we'll make progress
+        bool progress = false;
+
+        auto const pubLedgers = findNewLedgersToPublish(sl);
+        if (pubLedgers.empty())
+        {
+            if (!standalone_ && !app_.getFeeTrack().isLoadedLocal() &&
+                (app_.getJobQueue().getJobCount(jtPUBOLDLEDGER) < 10) &&
+                (mValidLedgerSeq == mPubLedgerSeq) &&
+                (getValidatedLedgerAge() < MAX_LEDGER_AGE_ACQUIRE) &&
+                (app_.getNodeStore().getWriteLoad() < MAX_WRITE_LOAD_ACQUIRE))
+            {
+                // We are in sync, so can acquire
+                InboundLedger::Reason reason = InboundLedger::Reason::HISTORY;
+                std::optional<std::uint32_t> missing;
+                {
+                    std::lock_guard sll(mCompleteLock);
+                    missing = prevMissing(
+                        mCompleteLedgers,
+                        mPubLedger->info().seq,
+                        app_.getNodeStore().earliestLedgerSeq());
+                }
+                if (missing)
+                {
+                    JLOG(m_journal.trace())
+                        << "tryAdvance discovered missing " << *missing;
+                    if ((mFillInProgress == 0 || *missing > mFillInProgress) &&
+                        shouldAcquire(
+                            mValidLedgerSeq,
+                            ledger_history_,
+                            app_.getSHAMapStore().minimumOnline(),
+                            *missing,
+                            m_journal))
+                    {
+                        JLOG(m_journal.trace())
+                            << "advanceThread should acquire";
+                    }
+                    else
+                        missing = std::nullopt;
+                }
+                if (missing)
+                {
+                    fetchForHistory(*missing, progress, reason, sl);
+                    if (mValidLedgerSeq != mPubLedgerSeq)
+                    {
+                        JLOG(m_journal.debug())
+                            << "tryAdvance found last valid changed";
+                        progress = true;
+                    }
+                }
+            }
+            else
+            {
+                mHistLedger.reset();
+                JLOG(m_journal.trace()) << "tryAdvance not fetching history";
+            }
+        }
+        else
+        {
+            JLOG(m_journal.trace()) << "tryAdvance found " << pubLedgers.size()
+                                    << " ledgers to publish";
+            for (auto const& ledger : pubLedgers)
+            {
+                {
+                    scope_unlock sul{sl};
+                    JLOG(m_journal.debug())
+                        << "tryAdvance publishing seq " << ledger->info().seq;
+                    setFullLedger(ledger, true, true);
+                }
+
+                setPubLedger(ledger);
+
+                {
+                    scope_unlock sul{sl};
+                    app_.getOPs().pubLedger(ledger);
+                }
+            }
+
+            app_.getOPs().clearNeedNetworkLedger();
+            progress = newPFWork("pf:newLedger", sl);
+        }
+        if (progress)
+            mAdvanceWork = true;
+    } while (mAdvanceWork);
+}

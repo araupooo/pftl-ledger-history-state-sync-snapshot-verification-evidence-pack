@@ -1,0 +1,67 @@
+# Source excerpts — postfiatd 0085a1ff885d6a446369cf73a4430f75af22be55 (2026-10-10, PR #50 merge, v1.0.9).
+# Line numbers verified with grep -n on a local checkout of the pinned commit.
+
+# --- src/libxrpl/ledger/View.cpp lines 1040-1102 ---
+hashOfSeq(ReadView const& ledger, LedgerIndex seq, beast::Journal journal)
+{
+    // Easy cases...
+    if (seq > ledger.seq())
+    {
+        JLOG(journal.warn())
+            << "Can't get seq " << seq << " from " << ledger.seq() << " future";
+        return std::nullopt;
+    }
+    if (seq == ledger.seq())
+        return ledger.info().hash;
+    if (seq == (ledger.seq() - 1))
+        return ledger.info().parentHash;
+
+    if (int diff = ledger.seq() - seq; diff <= 256)
+    {
+        // Within 256...
+        auto const hashIndex = ledger.read(keylet::skip());
+        if (hashIndex)
+        {
+            XRPL_ASSERT(
+                hashIndex->getFieldU32(sfLastLedgerSequence) ==
+                    (ledger.seq() - 1),
+                "ripple::hashOfSeq : matching ledger sequence");
+            STVector256 vec = hashIndex->getFieldV256(sfHashes);
+            if (vec.size() >= diff)
+                return vec[vec.size() - diff];
+            JLOG(journal.warn())
+                << "Ledger " << ledger.seq() << " missing hash for " << seq
+                << " (" << vec.size() << "," << diff << ")";
+        }
+        else
+        {
+            JLOG(journal.warn())
+                << "Ledger " << ledger.seq() << ":" << ledger.info().hash
+                << " missing normal list";
+        }
+    }
+
+    if ((seq & 0xff) != 0)
+    {
+        JLOG(journal.debug())
+            << "Can't get seq " << seq << " from " << ledger.seq() << " past";
+        return std::nullopt;
+    }
+
+    // in skiplist
+    auto const hashIndex = ledger.read(keylet::skip(seq));
+    if (hashIndex)
+    {
+        auto const lastSeq = hashIndex->getFieldU32(sfLastLedgerSequence);
+        XRPL_ASSERT(lastSeq >= seq, "ripple::hashOfSeq : minimum last ledger");
+        XRPL_ASSERT(
+            (lastSeq & 0xff) == 0, "ripple::hashOfSeq : valid last ledger");
+        auto const diff = (lastSeq - seq) >> 8;
+        STVector256 vec = hashIndex->getFieldV256(sfHashes);
+        if (vec.size() > diff)
+            return vec[vec.size() - diff - 1];
+    }
+    JLOG(journal.warn()) << "Can't get seq " << seq << " from " << ledger.seq()
+                         << " error";
+    return std::nullopt;
+}

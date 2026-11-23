@@ -1,0 +1,66 @@
+# Source excerpts — postfiatd 0085a1ff885d6a446369cf73a4430f75af22be55 (2026-10-10, PR #50 merge, v1.0.9).
+# Line numbers verified with grep -n on a local checkout of the pinned commit.
+
+# --- src/xrpld/app/ledger/detail/InboundLedger.cpp lines 300-361 ---
+            mSeq = mLedger->info().seq;
+        mLedger->stateMap().setLedgerSeq(mSeq);
+        mLedger->txMap().setLedgerSeq(mSeq);
+        mHaveHeader = true;
+    }
+
+    if (!mHaveTransactions)
+    {
+        if (mLedger->info().txHash.isZero())
+        {
+            JLOG(journal_.trace()) << "No TXNs to fetch";
+            mHaveTransactions = true;
+        }
+        else
+        {
+            TransactionStateSF filter(
+                mLedger->txMap().family().db(), app_.getLedgerMaster());
+            if (mLedger->txMap().fetchRoot(
+                    SHAMapHash{mLedger->info().txHash}, &filter))
+            {
+                if (neededTxHashes(1, &filter).empty())
+                {
+                    JLOG(journal_.trace()) << "Had full txn map locally";
+                    mHaveTransactions = true;
+                }
+            }
+        }
+    }
+
+    if (!mHaveState)
+    {
+        if (mLedger->info().accountHash.isZero())
+        {
+            JLOG(journal_.fatal())
+                << "We are acquiring a ledger with a zero account hash";
+            failed_ = true;
+            return;
+        }
+        AccountStateSF filter(
+            mLedger->stateMap().family().db(), app_.getLedgerMaster());
+        if (mLedger->stateMap().fetchRoot(
+                SHAMapHash{mLedger->info().accountHash}, &filter))
+        {
+            if (neededStateHashes(1, &filter).empty())
+            {
+                JLOG(journal_.trace()) << "Had full AS map locally";
+                mHaveState = true;
+            }
+        }
+    }
+
+    if (mHaveTransactions && mHaveState)
+    {
+        JLOG(journal_.debug()) << "Had everything locally";
+        complete_ = true;
+        XRPL_ASSERT(
+            mLedger->info().seq < XRP_LEDGER_EARLIEST_FEES ||
+                mLedger->read(keylet::fees()),
+            "ripple::InboundLedger::tryDB : valid ledger fees");
+        mLedger->setImmutable();
+    }
+}

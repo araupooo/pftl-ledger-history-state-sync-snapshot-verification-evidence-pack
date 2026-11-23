@@ -1,0 +1,73 @@
+# Source excerpts — postfiatd 0085a1ff885d6a446369cf73a4430f75af22be55 (2026-10-10, PR #50 merge, v1.0.9).
+# Line numbers verified with grep -n on a local checkout of the pinned commit.
+
+# --- src/xrpld/app/ledger/Ledger.cpp lines 900-968 ---
+// VFALCO TODO Document this skip list concept
+void
+Ledger::updateSkipList()
+{
+    if (info_.seq == 0)  // genesis ledger has no previous ledger
+        return;
+
+    std::uint32_t prevIndex = info_.seq - 1;
+
+    // update record of every 256th ledger
+    if ((prevIndex & 0xff) == 0)
+    {
+        auto const k = keylet::skip(prevIndex);
+        auto sle = peek(k);
+        std::vector<uint256> hashes;
+
+        bool created;
+        if (!sle)
+        {
+            sle = std::make_shared<SLE>(k);
+            created = true;
+        }
+        else
+        {
+            hashes = static_cast<decltype(hashes)>(sle->getFieldV256(sfHashes));
+            created = false;
+        }
+
+        XRPL_ASSERT(
+            hashes.size() <= 256,
+            "ripple::Ledger::updateSkipList : first maximum hashes size");
+        hashes.push_back(info_.parentHash);
+        sle->setFieldV256(sfHashes, STVector256(hashes));
+        sle->setFieldU32(sfLastLedgerSequence, prevIndex);
+        if (created)
+            rawInsert(sle);
+        else
+            rawReplace(sle);
+    }
+
+    // update record of past 256 ledger
+    auto const k = keylet::skip();
+    auto sle = peek(k);
+    std::vector<uint256> hashes;
+    bool created;
+    if (!sle)
+    {
+        sle = std::make_shared<SLE>(k);
+        created = true;
+    }
+    else
+    {
+        hashes = static_cast<decltype(hashes)>(sle->getFieldV256(sfHashes));
+        created = false;
+    }
+    XRPL_ASSERT(
+        hashes.size() <= 256,
+        "ripple::Ledger::updateSkipList : second maximum hashes size");
+    if (hashes.size() == 256)
+        hashes.erase(hashes.begin());
+    hashes.push_back(info_.parentHash);
+    sle->setFieldV256(sfHashes, STVector256(hashes));
+    sle->setFieldU32(sfLastLedgerSequence, prevIndex);
+    if (created)
+        rawInsert(sle);
+    else
+        rawReplace(sle);
+}
+

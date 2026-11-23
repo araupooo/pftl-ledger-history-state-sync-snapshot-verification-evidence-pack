@@ -1,0 +1,18 @@
+# Source excerpts — postfiatd 0085a1ff885d6a446369cf73a4430f75af22be55 (2026-10-10, PR #50 merge, v1.0.9).
+# Line numbers verified with grep -n on a local checkout of the pinned commit.
+
+# --- include/xrpl/protocol/HashPrefix.h lines 31-37 ---
+constexpr std::uint32_t
+make_hash_prefix(char a, char b, char c)
+{
+    return (static_cast<std::uint32_t>(a) << 24) +
+        (static_cast<std::uint32_t>(b) << 16) +
+        (static_cast<std::uint32_t>(c) << 8);
+}
+
+# --- include/xrpl/protocol/HashPrefix.h lines 66-70 ---
+    innerNode = detail::make_hash_prefix('M', 'I', 'N'),
+
+    /** ledger master data for signing */
+    ledgerMaster = detail::make_hash_prefix('L', 'W', 'R'),
+
