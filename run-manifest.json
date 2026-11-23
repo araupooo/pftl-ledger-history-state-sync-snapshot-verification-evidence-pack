@@ -1,0 +1,45 @@
+{
+ "pack": "PFTL Ledger History, State-Sync, and Snapshot Verification Evidence Pack",
+ "pinned_commit": "0085a1ff885d6a446369cf73a4430f75af22be55",
+ "validated_ledger": 8284498,
+ "validated_hash": "1F1A016884FA0A7458BF11BE71F7ADEABD740961643DD8466996E213A5D91499",
+ "earliest_ledger": 8200054,
+ "build_version": "1.0.9",
+ "network_id": 2025,
+ "counts": {
+  "findings": {
+   "total": 12,
+   "by_severity": {
+    "HIGH": 3,
+    "MEDIUM": 5,
+    "LOW": 4
+   },
+   "by_status": {
+    "VERIFIED": 12
+   }
+  },
+  "claims": {
+   "total": 30,
+   "by_status": {
+    "VERIFIED": 23,
+    "SPECIFIED": 6,
+    "UNTESTABLE": 1
+   }
+  },
+  "risks": {
+   "total": 14,
+   "by_severity": {
+    "HIGH": 3,
+    "MEDIUM": 6,
+    "LOW": 5
+   }
+  },
+  "gaps": 7
+ },
+ "verification": {
+  "headers_recomputed": 17,
+  "hash_matches": 17,
+  "chain_links_ok": 7,
+  "chain_links_total": 7
+ }
+}
