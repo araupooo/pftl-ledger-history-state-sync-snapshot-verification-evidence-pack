@@ -1,0 +1,103 @@
+{
+ "consecutive_run": {
+  "seqs": [
+   8284498,
+   8284497,
+   8284496,
+   8284495,
+   8284494,
+   8284493
+  ],
+  "hash_matches": 6,
+  "hash_total": 6,
+  "parent_links_ok": 5,
+  "parent_links_total": 5,
+  "results": [
+   {
+    "seq": 8284498,
+    "reported_hash": "1F1A016884FA0A7458BF11BE71F7ADEABD740961643DD8466996E213A5D91499",
+    "recomputed_hash": "1F1A016884FA0A7458BF11BE71F7ADEABD740961643DD8466996E213A5D91499",
+    "hash_match": true,
+    "parent_link_ok": true,
+    "parent_seq_gap": 1
+   },
+   {
+    "seq": 8284497,
+    "reported_hash": "06C8DC5528647874F4469E4D9A5240104BA69544C2213A221C3E2583253AB0F3",
+    "recomputed_hash": "06C8DC5528647874F4469E4D9A5240104BA69544C2213A221C3E2583253AB0F3",
+    "hash_match": true,
+    "parent_link_ok": true,
+    "parent_seq_gap": 1
+   },
+   {
+    "seq": 8284496,
+    "reported_hash": "0689BE0B07B4A8E36EB00CC44D66AB2B9CD06288519438BBE0DDC12B95F83267",
+    "recomputed_hash": "0689BE0B07B4A8E36EB00CC44D66AB2B9CD06288519438BBE0DDC12B95F83267",
+    "hash_match": true,
+    "parent_link_ok": true,
+    "parent_seq_gap": 1
+   },
+   {
+    "seq": 8284495,
+    "reported_hash": "B1034ED784550DFBDB8273E3BE197B6892D714D8E8C7F28EB0C01D7F1E9AF8D4",
+    "recomputed_hash": "B1034ED784550DFBDB8273E3BE197B6892D714D8E8C7F28EB0C01D7F1E9AF8D4",
+    "hash_match": true,
+    "parent_link_ok": true,
+    "parent_seq_gap": 1
+   },
+   {
+    "seq": 8284494,
+    "reported_hash": "C65D4E4AD400CC64998200DA199605BAAE28FFCF80A0F448B61B3AD72DB854E9",
+    "recomputed_hash": "C65D4E4AD400CC64998200DA199605BAAE28FFCF80A0F448B61B3AD72DB854E9",
+    "hash_match": true,
+    "parent_link_ok": true,
+    "parent_seq_gap": 1
+   },
+   {
+    "seq": 8284493,
+    "reported_hash": "C5563271BFD473618BF0F5483DF1221A92F399CE6FFB0D2FD52F063D491F1DF4",
+    "recomputed_hash": "C5563271BFD473618BF0F5483DF1221A92F399CE6FFB0D2FD52F063D491F1DF4",
+    "hash_match": true,
+    "parent_link_ok": null,
+    "parent_seq_gap": null
+   }
+  ]
+ },
+ "earliest_run": {
+  "seqs": [
+   8200056,
+   8200055,
+   8200054
+  ],
+  "hash_matches": 3,
+  "hash_total": 3,
+  "parent_links_ok": 2,
+  "parent_links_total": 2,
+  "results": [
+   {
+    "seq": 8200056,
+    "reported_hash": "94906D5437927F1B15B2D43AD69832083A77D6C2FF79B846D019341DA85B01EB",
+    "recomputed_hash": "94906D5437927F1B15B2D43AD69832083A77D6C2FF79B846D019341DA85B01EB",
+    "hash_match": true,
+    "parent_link_ok": true,
+    "parent_seq_gap": 1
+   },
+   {
+    "seq": 8200055,
+    "reported_hash": "BE163691B63B9C37F5E0F7C6F1E24CB87A86E6A528141738FCCD8493770F63E1",
+    "recomputed_hash": "BE163691B63B9C37F5E0F7C6F1E24CB87A86E6A528141738FCCD8493770F63E1",
+    "hash_match": true,
+    "parent_link_ok": true,
+    "parent_seq_gap": 1
+   },
+   {
+    "seq": 8200054,
+    "reported_hash": "370CE545196307071AE272FB26EDDCB90BDD3CA0FA5C395744FD53E287500CDD",
+    "recomputed_hash": "370CE545196307071AE272FB26EDDCB90BDD3CA0FA5C395744FD53E287500CDD",
+    "hash_match": true,
+    "parent_link_ok": null,
+    "parent_seq_gap": null
+   }
+  ]
+ }
+}

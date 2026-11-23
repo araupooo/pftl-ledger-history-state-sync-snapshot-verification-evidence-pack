@@ -1,0 +1,15 @@
+{
+ "earliest_ledger": 8200054,
+ "validated_ledger": 8284498,
+ "validated_hash": "1F1A016884FA0A7458BF11BE71F7ADEABD740961643DD8466996E213A5D91499",
+ "complete_ledgers": "8200054-8284498",
+ "ledgers_in_range": 84445,
+ "ledgers_before_earliest": 8200053,
+ "time_span_s": 255540,
+ "time_span_days": 2.96,
+ "cadence_s_per_ledger": 3.042,
+ "build_version": "1.0.9",
+ "network_id": 2025,
+ "peers": 21,
+ "validation_quorum": 17
+}

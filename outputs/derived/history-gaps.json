@@ -1,0 +1,39 @@
+{
+ "complete_range": "8200054-8284498",
+ "below_earliest_unresolvable": 8200053,
+ "probes": {
+  "ledger_8200053": {
+   "resolvable": false,
+   "error": "lgrNotFound",
+   "error_code": 21
+  },
+  "ledger_86784": {
+   "resolvable": false,
+   "error": "lgrNotFound",
+   "error_code": 21
+  },
+  "ledger_86785": {
+   "resolvable": false,
+   "error": "lgrNotFound",
+   "error_code": 21
+  },
+  "ledger_8200054_earliest": {
+   "resolvable": true,
+   "hash": "370CE54519630707..."
+  }
+ },
+ "activation_tx_86785": {
+  "error": "txnNotFound",
+  "error_code": 29
+ },
+ "activation_86785_vhs": {
+  "amendments_at_86785": 64,
+  "date": "2026-02-09T14:31:12.000Z",
+  "node_rederivable": false
+ },
+ "account_tx_clamp": {
+  "requested_min": 1,
+  "echoed_min": 8200054,
+  "echoed_max": 8284498
+ }
+}

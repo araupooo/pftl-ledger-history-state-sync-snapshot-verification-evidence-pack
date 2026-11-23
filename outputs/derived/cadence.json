@@ -1,0 +1,12 @@
+{
+ "window_s": 60.8,
+ "seq_start": 8284512,
+ "seq_end": 8284532,
+ "ledgers": 20,
+ "cadence_s_per_ledger": 3.042,
+ "validated_hash_end": "0FC4B47569CD002EB78FCEC09EF16127BA659D08EB3F17721588C98166F872E9",
+ "build_version": "1.0.9",
+ "network_id": 2025,
+ "peers": 21,
+ "validation_quorum": 17
+}

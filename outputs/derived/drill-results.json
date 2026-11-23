@@ -1,0 +1,174 @@
+{
+ "cases": [
+  {
+   "drill": "A",
+   "id": "A-01",
+   "label": "complete_ledgers is a single contiguous range",
+   "pass": true,
+   "detail": "8200054-8284498 (84445 ledgers)",
+   "elapsed_ms": 0.24
+  },
+  {
+   "drill": "A",
+   "id": "A-02",
+   "label": "earliest ledger header hash recomputes",
+   "pass": true,
+   "detail": "seq 8200054 hash MATCH",
+   "elapsed_ms": 0.2
+  },
+  {
+   "drill": "A",
+   "id": "A-03",
+   "label": "validated ledger header hash recomputes",
+   "pass": true,
+   "detail": "seq 8284498 hash MATCH",
+   "elapsed_ms": 0.11
+  },
+  {
+   "drill": "A",
+   "id": "A-04",
+   "label": "parent chain links hold for 6 consecutive ledgers",
+   "pass": true,
+   "detail": "seqs 8284498..8284493: 5/5 links OK, 6/6 hashes MATCH",
+   "elapsed_ms": 0.49
+  },
+  {
+   "drill": "A",
+   "id": "A-05",
+   "label": "skip-list hashOfSeq matches the chain headers",
+   "pass": true,
+   "detail": "5/5 skip-list hashes match chain headers",
+   "elapsed_ms": 0.68
+  },
+  {
+   "drill": "A",
+   "id": "A-06",
+   "label": "flag-ledger skip anchor matches fetched flag headers",
+   "pass": true,
+   "detail": "anchor LastSeq 8284416: hash(8284160) at tail-1, hash(8283904) and hash(8283648) match their positions",
+   "elapsed_ms": 0.3
+  },
+  {
+   "drill": "A",
+   "id": "A-07",
+   "label": "node is in full state with a fresh validated ledger",
+   "pass": true,
+   "detail": "state full, validated age 1s, quorum 17",
+   "elapsed_ms": 0.08
+  },
+  {
+   "drill": "A",
+   "id": "A-08",
+   "label": "validator list parses and names the trusted set",
+   "pass": true,
+   "detail": "VL blob sequence 30: 25 validators, publisher key ED3F1E0DA736..., manifest present, blob signature present but unverified (no Ed25519 in stdlib)",
+   "elapsed_ms": 14.73
+  },
+  {
+   "drill": "B",
+   "id": "B-01",
+   "label": "cold old-ledger lookup resolves within 3 attempts",
+   "pass": true,
+   "detail": "ledger 8201001 returned on attempt 1",
+   "elapsed_ms": 1313.9
+  },
+  {
+   "drill": "B",
+   "id": "B-02",
+   "label": "cold-lookup ledger hash recomputes (no wrong hash served)",
+   "pass": true,
+   "detail": "hash MATCH for cold-lookup ledger 8201001",
+   "elapsed_ms": 807.83
+  },
+  {
+   "drill": "B",
+   "id": "B-03",
+   "label": "86785 activation transaction is txnNotFound",
+   "pass": true,
+   "detail": "txnNotFound error_code 29",
+   "elapsed_ms": 0.24
+  },
+  {
+   "drill": "B",
+   "id": "B-04",
+   "label": "account_tx min below earliest is clamped to earliest",
+   "pass": true,
+   "detail": "requested min 1, echoed min 8200054",
+   "elapsed_ms": 0.17
+  },
+  {
+   "drill": "B",
+   "id": "B-05",
+   "label": "ledger below earliest returns an error, never a ledger",
+   "pass": true,
+   "detail": "error lgrNotFound code 21",
+   "elapsed_ms": 0.06
+  },
+  {
+   "drill": "B",
+   "id": "B-06",
+   "label": "86785 activation event is not re-derivable from the node",
+   "pass": true,
+   "detail": "activation tx txnNotFound; VHS records 64 amendments at 86785 on 2026-02-09T14:31:12.000Z, none re-derivable from the node",
+   "elapsed_ms": 0.21
+  },
+  {
+   "drill": "C",
+   "id": "C-01",
+   "label": "flipping drops changes the recomputed hash",
+   "pass": true,
+   "detail": "drops+1 -> hash differs from claimed hash",
+   "elapsed_ms": 0.08
+  },
+  {
+   "drill": "C",
+   "id": "C-02",
+   "label": "flipping parentHash changes the recomputed hash",
+   "pass": true,
+   "detail": "parentHash bit flip -> hash differs from claimed hash",
+   "elapsed_ms": 0.07
+  },
+  {
+   "drill": "C",
+   "id": "C-03",
+   "label": "flipping accountHash changes the recomputed hash",
+   "pass": true,
+   "detail": "accountHash bit flip -> hash differs from claimed hash",
+   "elapsed_ms": 0.05
+  },
+  {
+   "drill": "C",
+   "id": "C-04",
+   "label": "tampered parent link is detected by the chain check",
+   "pass": true,
+   "detail": "parent link V -> V-1 reported False after tamper",
+   "elapsed_ms": 0.31
+  },
+  {
+   "drill": "C",
+   "id": "C-05",
+   "label": "tampered skip-list entry fails the hashOfSeq cross-check",
+   "pass": true,
+   "detail": "skip-list hash(V-1) no longer matches chain header after tamper",
+   "elapsed_ms": 0.52
+  },
+  {
+   "drill": "C",
+   "id": "C-06",
+   "label": "flipping close_flags changes the recomputed hash",
+   "pass": true,
+   "detail": "close_flags flip -> hash differs from claimed hash",
+   "elapsed_ms": 0.07
+  },
+  {
+   "drill": "C",
+   "id": "C-07",
+   "label": "hash-swap between two headers is detected",
+   "pass": true,
+   "detail": "hash of V-1 claimed for V -> recomputation differs",
+   "elapsed_ms": 0.08
+  }
+ ],
+ "summary": "drill result: 21/21 cases PASS (A 8, B 6, C 7)",
+ "wall_s": 2.14
+}
